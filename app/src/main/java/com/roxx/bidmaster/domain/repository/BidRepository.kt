@@ -1,11 +1,11 @@
 package com.roxx.bidmaster.domain.repository
 
-import com.roxx.bidmaster.data.model.Bid
-import com.roxx.bidmaster.data.model.BidResponse
-import com.roxx.bidmaster.data.model.Money
+import com.roxx.bidmaster.domain.model.Bid
+import com.roxx.bidmaster.domain.model.BidResponse
+import com.roxx.bidmaster.domain.model.Money
 import com.roxx.bidmaster.domain.model.User
-import com.roxx.bidmaster.data.model.UserRequest
-import com.roxx.bidmaster.data.model.UserResponse
+import com.roxx.bidmaster.domain.model.UserRequest
+import com.roxx.bidmaster.data.network.model.UserResponse
 import com.roxx.bidmaster.domain.model.Result
 
 interface BidRepository {

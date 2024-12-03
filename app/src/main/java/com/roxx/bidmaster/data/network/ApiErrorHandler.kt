@@ -29,8 +29,9 @@ object ApiErrorHandler {
             }
 
             401 -> {
-                Log.e("API Call", "Unauthorized: ${e.message()}")
-                Result.Error("Unauthorized access", false)
+                val errorMessage = e.response()?.errorBody()?.string() ?: "Unauthorized access"
+                Log.e("API Call", "Unauthorized: $errorMessage")
+                Result.Error(errorMessage, true)
             }
 
             403 -> {
