@@ -6,6 +6,7 @@ import com.roxx.bidmaster.domain.use_case.BidStateUseCase
 import com.roxx.bidmaster.domain.use_case.CreateUserUseCase
 import com.roxx.bidmaster.domain.use_case.DeleteBidUseCase
 import com.roxx.bidmaster.domain.use_case.GetBidsUseCase
+import com.roxx.bidmaster.domain.use_case.GetLastBidUseCase
 import com.roxx.bidmaster.domain.use_case.GetMyInformationUseCase
 import com.roxx.bidmaster.domain.use_case.GetTopUsersUseCase
 import com.roxx.bidmaster.domain.use_case.LoginUserUseCase
@@ -80,5 +81,14 @@ object UseCaseModule {
     @Singleton
     fun provideBidStateUseCase(preferences: Preferences): BidStateUseCase {
         return BidStateUseCase(preferences)
+    }
+
+    @Provides
+    @Singleton
+    fun getLastBidUseCase(
+        bidRepository: BidRepository,
+        preferences: Preferences
+    ): GetLastBidUseCase {
+        return GetLastBidUseCase(bidRepository, preferences)
     }
 }

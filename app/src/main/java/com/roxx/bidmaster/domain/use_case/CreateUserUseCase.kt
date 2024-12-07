@@ -9,12 +9,13 @@ class CreateUserUseCase(
     private val bidRepository: BidRepository,
     private val preferences: Preferences
 ) {
-    suspend operator fun invoke(userRequest: UserRequest): Result<String> {
-        return when(val result = bidRepository.createUser(userRequest)) {
+    suspend operator fun invoke(username: String, password: String): Result<String> {
+        return when (val result = bidRepository.createUser(UserRequest(username, password))) {
             is Result.Success -> {
                 result.data?.let { preferences.saveToken(it.token) }
                 Result.Success("User successfully created")
             }
+
             is Result.Error -> {
                 Result.Error(message = result.message ?: "Unknown error")
             }

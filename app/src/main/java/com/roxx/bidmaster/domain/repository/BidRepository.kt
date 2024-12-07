@@ -15,5 +15,6 @@ interface BidRepository {
     suspend fun getMyInformation(): Result<User>
     suspend fun makeBid(money: Money): Result<BidResponse>
     suspend fun getMyBids(): Result<List<Bid>>
+    suspend fun getLatBidId(): Result<Int>
     suspend fun deleteBid(bidId: Int): Result<Money>
 }

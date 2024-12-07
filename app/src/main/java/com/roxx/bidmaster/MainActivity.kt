@@ -16,7 +16,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.roxx.bidmaster.presentation.navigation.Routes
 import com.roxx.bidmaster.presentation.navigation.navigate
+import com.roxx.bidmaster.presentation.screens.home.HomeScreen
 import com.roxx.bidmaster.presentation.screens.login.LoginScreen
+import com.roxx.bidmaster.presentation.screens.register.RegisterScreen
 import com.roxx.bidmaster.ui.theme.BidMasterTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +42,18 @@ class MainActivity : ComponentActivity() {
                         ) {
                             composable(Routes.LOGIN) {
                                 LoginScreen(
+                                    snackBarHostState = snackBarHostState,
+                                    onNavigate = navController::navigate
+                                )
+                            }
+                            composable(Routes.REGISTER) {
+                                RegisterScreen(
+                                    snackBarHostState = snackBarHostState,
+                                    onNavigate = navController::navigate
+                                )
+                            }
+                            composable(Routes.HOME) {
+                                HomeScreen(
                                     snackBarHostState = snackBarHostState,
                                     onNavigate = navController::navigate
                                 )

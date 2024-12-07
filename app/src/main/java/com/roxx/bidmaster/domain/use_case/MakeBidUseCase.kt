@@ -10,10 +10,11 @@ class MakeBidUseCase(
     private val repository: BidRepository,
     private val preferences: Preferences
 ) {
-    suspend operator fun invoke(money: Money): Result<BidResponse> {
-        return when(val result = repository.makeBid(money)) {
+    suspend operator fun invoke(money: Int): Result<BidResponse> {
+        return when(val result = repository.makeBid(Money(money))) {
             is Result.Success -> {
                 preferences.setBidState(true)
+                result.data?.let { preferences.saveBidId(it.bidId) }
                 result
             }
             is Result.Error -> {

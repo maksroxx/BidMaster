@@ -1,5 +1,6 @@
 package com.roxx.bidmaster.data.repository
 
+import android.util.Log
 import com.roxx.bidmaster.domain.model.Bid
 import com.roxx.bidmaster.domain.model.BidResponse
 import com.roxx.bidmaster.domain.model.Money
@@ -42,7 +43,7 @@ class BidRepositoryImpl(private val bidApi: BidApi) : BidRepository {
 
     override suspend fun makeBid(money: Money): Result<BidResponse> {
         return handleApiCall {
-            val bidResponse = bidApi.makeBid(money)
+            val bidResponse = bidApi.makeBid(money = money)
             Result.Success(bidResponse)
         }
     }
@@ -54,9 +55,16 @@ class BidRepositoryImpl(private val bidApi: BidApi) : BidRepository {
         }
     }
 
+    override suspend fun getLatBidId(): Result<Int> {
+        return handleApiCall {
+            val bidId = bidApi.getLatBid()
+            Result.Success(bidId.lastBidId)
+        }
+    }
+
     override suspend fun deleteBid(bidId: Int): Result<Money> {
         return handleApiCall {
-            val money = bidApi.deleteBid(bidId)
+            val money = bidApi.deleteBid(bidId = bidId)
             Result.Success(money)
         }
     }

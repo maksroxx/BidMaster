@@ -1,4 +1,4 @@
-package com.roxx.bidmaster.presentation.screens.login
+package com.roxx.bidmaster.presentation.screens.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,14 +25,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.roxx.bidmaster.presentation.screens.login.LoginEvent
 import com.roxx.bidmaster.presentation.util.UiEvent
 import com.roxx.bidmaster.ui.theme.LocalSpacing
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     snackBarHostState: SnackbarHostState,
     onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: RegisterViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val enabledButton = viewModel.password.isNotEmpty() && viewModel.username.isNotEmpty()
@@ -65,7 +66,7 @@ fun LoginScreen(
         ) {
             OutlinedTextField(
                 value = viewModel.username,
-                onValueChange = { viewModel.onEvent(LoginEvent.OnUsernameChange(it)) },
+                onValueChange = { viewModel.onEvent(RegisterEvent.OnUsernameChange(it)) },
                 label = { Text("Username") },
                 singleLine = true,
                 leadingIcon = {
@@ -78,7 +79,7 @@ fun LoginScreen(
 
             OutlinedTextField(
                 value = viewModel.password,
-                onValueChange = { viewModel.onEvent(LoginEvent.OnPasswordChange(it)) },
+                onValueChange = { viewModel.onEvent(RegisterEvent.OnPasswordChange(it)) },
                 label = { Text("Password") },
                 visualTransformation = PasswordVisualTransformation(),
                 singleLine = true,
@@ -91,20 +92,20 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(localSpacing.large))
 
             Button(
-                onClick = { viewModel.onEvent(LoginEvent.Login) },
+                onClick = { viewModel.onEvent(RegisterEvent.Register) },
                 modifier = Modifier.fillMaxWidth(),
                 enabled = enabledButton
             ) {
-                Text(text = "Enter")
+                Text(text = "Register")
             }
 
             Spacer(modifier = Modifier.height(localSpacing.small))
 
             Text(
-                text = "No account? Register",
+                text = "Have account? Login",
                 color = Color.Black,
                 modifier = Modifier
-                    .clickable { viewModel.onEvent(LoginEvent.ToRegister) }
+                    .clickable { viewModel.onEvent(RegisterEvent.ToLogin) }
             )
         }
     }
