@@ -68,4 +68,11 @@ class BidRepositoryImpl(private val bidApi: BidApi) : BidRepository {
             Result.Success(money)
         }
     }
+
+    override suspend fun validateToken(): Result<String> {
+        return handleApiCall {
+            val result = bidApi.validateToken()
+            Result.Success(result.token)
+        }
+    }
 }

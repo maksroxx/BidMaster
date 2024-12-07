@@ -17,4 +17,5 @@ interface BidRepository {
     suspend fun getMyBids(): Result<List<Bid>>
     suspend fun getLatBidId(): Result<Int>
     suspend fun deleteBid(bidId: Int): Result<Money>
+    suspend fun validateToken(): Result<String>
 }

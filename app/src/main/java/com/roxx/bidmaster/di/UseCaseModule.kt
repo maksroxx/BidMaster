@@ -11,6 +11,7 @@ import com.roxx.bidmaster.domain.use_case.GetMyInformationUseCase
 import com.roxx.bidmaster.domain.use_case.GetTopUsersUseCase
 import com.roxx.bidmaster.domain.use_case.LoginUserUseCase
 import com.roxx.bidmaster.domain.use_case.MakeBidUseCase
+import com.roxx.bidmaster.domain.use_case.ValidateTokenUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -85,10 +86,19 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun getLastBidUseCase(
+    fun provideLastBidUseCase(
         bidRepository: BidRepository,
         preferences: Preferences
     ): GetLastBidUseCase {
         return GetLastBidUseCase(bidRepository, preferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateToken(
+        bidRepository: BidRepository,
+        preferences: Preferences
+    ): ValidateTokenUseCase {
+        return ValidateTokenUseCase(bidRepository, preferences)
     }
 }

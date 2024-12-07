@@ -53,6 +53,9 @@ class HomeViewModel @Inject constructor(
             lastBidDeferred.await()
             when(val result = getMyInformationUseCase()) {
                 is Result.Error -> {
+                    if(result.redirectToLogin) {
+                        _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
+                    }
                     result.message?.let {
                         _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
                     }
@@ -73,6 +76,9 @@ class HomeViewModel @Inject constructor(
                 viewModelScope.launch {
                     when(val result = deleteBidUseCase()) {
                         is Result.Error -> {
+                            if(result.redirectToLogin) {
+                                _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
+                            }
                             result.message?.let {
                                 _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
                             }
@@ -97,6 +103,9 @@ class HomeViewModel @Inject constructor(
                 viewModelScope.launch {
                     when(val result = bidUseCase(amount)) {
                         is Result.Error -> {
+                            if(result.redirectToLogin) {
+                                _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
+                            }
                             result.message?.let {
                                 _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
                             }
@@ -112,7 +121,9 @@ class HomeViewModel @Inject constructor(
             }
 
             is HomeEvent.OnBidValueChange -> {
-                amount = event.amount
+                if (event.amount <= balance) {
+                    amount = event.amount
+                }
             }
 
             is HomeEvent.OnSliderValueChange -> {

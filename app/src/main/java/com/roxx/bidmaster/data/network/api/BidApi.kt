@@ -45,6 +45,11 @@ interface BidApi {
         @Header("Requires-Auth") requiresAuth: String = "true"
     ): BidId
 
+    @GET("/protected")
+    suspend fun validateToken(
+        @Header("Requires-Auth") requiresAuth: String = "true"
+    ): UserResponse
+
     @DELETE("/me/bids/{id}")
     suspend fun deleteBid(
         @Header("Requires-Auth") requiresAuth: String = "true",

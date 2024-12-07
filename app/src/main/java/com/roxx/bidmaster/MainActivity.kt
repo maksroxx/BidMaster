@@ -19,6 +19,7 @@ import com.roxx.bidmaster.presentation.navigation.navigate
 import com.roxx.bidmaster.presentation.screens.home.HomeScreen
 import com.roxx.bidmaster.presentation.screens.login.LoginScreen
 import com.roxx.bidmaster.presentation.screens.register.RegisterScreen
+import com.roxx.bidmaster.presentation.screens.welcome.WelcomeScreen
 import com.roxx.bidmaster.ui.theme.BidMasterTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,8 +39,13 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             modifier = Modifier.padding(it),
                             navController = navController,
-                            startDestination = Routes.LOGIN
+                            startDestination = Routes.LOGO
                         ) {
+                            composable(Routes.LOGO) {
+                                WelcomeScreen(
+                                    onNavigate = navController::navigate
+                                )
+                            }
                             composable(Routes.LOGIN) {
                                 LoginScreen(
                                     snackBarHostState = snackBarHostState,
