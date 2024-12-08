@@ -18,6 +18,7 @@ import com.roxx.bidmaster.presentation.navigation.Routes
 import com.roxx.bidmaster.presentation.navigation.navigate
 import com.roxx.bidmaster.presentation.screens.home.HomeScreen
 import com.roxx.bidmaster.presentation.screens.login.LoginScreen
+import com.roxx.bidmaster.presentation.screens.profile.ProfileScreen
 import com.roxx.bidmaster.presentation.screens.register.RegisterScreen
 import com.roxx.bidmaster.presentation.screens.welcome.WelcomeScreen
 import com.roxx.bidmaster.ui.theme.BidMasterTheme
@@ -60,6 +61,12 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(Routes.HOME) {
                                 HomeScreen(
+                                    snackBarHostState = snackBarHostState,
+                                    onNavigate = navController::navigate
+                                )
+                            }
+                            composable(Routes.PROFILE) {
+                                ProfileScreen(
                                     snackBarHostState = snackBarHostState,
                                     onNavigate = navController::navigate
                                 )

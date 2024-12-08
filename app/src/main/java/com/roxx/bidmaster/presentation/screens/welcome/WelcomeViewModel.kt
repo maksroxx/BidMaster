@@ -22,7 +22,7 @@ class WelcomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            when(val result = validateTokenUseCase()){
+            when(validateTokenUseCase()){
                 is Result.Error -> {
                     _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
                 }

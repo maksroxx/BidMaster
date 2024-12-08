@@ -1,6 +1,5 @@
 package com.roxx.bidmaster.presentation.screens.home
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -38,51 +37,33 @@ class HomeViewModel @Inject constructor(
     var amount by mutableStateOf(0)
         private set
 
-    private val _bidState = MutableStateFlow(false)
-    val bidState: StateFlow<Boolean> = _bidState
-
     var sliderValue by mutableStateOf(0f)
         private set
+
+    private val _bidState = MutableStateFlow(false)
+    val bidState: StateFlow<Boolean> = _bidState
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
-        viewModelScope.launch {
-            val lastBidDeferred = async { getLastBidUseCase() }
-            lastBidDeferred.await()
-            when(val result = getMyInformationUseCase()) {
-                is Result.Error -> {
-                    if(result.redirectToLogin) {
-                        _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
-                    }
-                    result.message?.let {
-                        _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
-                    }
-                }
-                is Result.Success -> {
-                    result.data?.let {
-                        balance = result.data.balance
-                    }
-                }
-            }
-            _bidState.value = bidStateUseCase()
-        }
+        collectLatest()
     }
 
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.DeleteBid -> {
                 viewModelScope.launch {
-                    when(val result = deleteBidUseCase()) {
+                    when (val result = deleteBidUseCase()) {
                         is Result.Error -> {
-                            if(result.redirectToLogin) {
+                            if (result.redirectToLogin) {
                                 _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
                             }
                             result.message?.let {
                                 _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
                             }
                         }
+
                         is Result.Success -> {
                             result.data?.let {
                                 balance = result.data.amount
@@ -101,15 +82,16 @@ class HomeViewModel @Inject constructor(
 
             is HomeEvent.MakeBid -> {
                 viewModelScope.launch {
-                    when(val result = bidUseCase(amount)) {
+                    when (val result = bidUseCase(amount)) {
                         is Result.Error -> {
-                            if(result.redirectToLogin) {
+                            if (result.redirectToLogin) {
                                 _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
                             }
                             result.message?.let {
                                 _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
                             }
                         }
+
                         is Result.Success -> {
                             result.data?.let {
                                 balance = result.data.balance
@@ -130,6 +112,30 @@ class HomeViewModel @Inject constructor(
                 sliderValue = event.sliderValue
                 amount = (sliderValue * balance).toInt()
             }
+        }
+    }
+
+    private fun collectLatest() {
+        viewModelScope.launch {
+            val lastBidDeferred = async { getLastBidUseCase() }
+            lastBidDeferred.await()
+            when (val result = getMyInformationUseCase()) {
+                is Result.Error -> {
+                    if (result.redirectToLogin) {
+                        _uiEvent.send(UiEvent.Navigate(Routes.LOGIN))
+                    }
+                    result.message?.let {
+                        _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
+                    }
+                }
+
+                is Result.Success -> {
+                    result.data?.let {
+                        balance = result.data.balance
+                    }
+                }
+            }
+            _bidState.value = bidStateUseCase()
         }
     }
 }
