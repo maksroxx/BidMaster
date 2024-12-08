@@ -1,5 +1,4 @@
 [versions]
-accompanistSwiperefresh = "0.35.1-alpha"
 agp = "8.6.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -16,7 +15,6 @@ hiltAndroid = "2.48.1"
 hiltNavigationCompose = "1.2.0"
 
 [libraries]
-accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

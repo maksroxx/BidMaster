@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHostState
@@ -93,7 +94,11 @@ fun LoginScreen(
             Button(
                 onClick = { viewModel.onEvent(LoginEvent.Login) },
                 modifier = Modifier.fillMaxWidth(),
-                enabled = enabledButton
+                enabled = enabledButton,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (enabledButton) Color.Black.copy(alpha = 0.9f) else Color.DarkGray,
+                    contentColor = Color.White
+                )
             ) {
                 Text(text = "Enter")
             }

@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHostState
@@ -25,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.roxx.bidmaster.presentation.screens.login.LoginEvent
 import com.roxx.bidmaster.presentation.util.UiEvent
 import com.roxx.bidmaster.ui.theme.LocalSpacing
 
@@ -94,7 +94,11 @@ fun RegisterScreen(
             Button(
                 onClick = { viewModel.onEvent(RegisterEvent.Register) },
                 modifier = Modifier.fillMaxWidth(),
-                enabled = enabledButton
+                enabled = enabledButton,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (enabledButton) Color.Black.copy(alpha = 0.9f) else Color.DarkGray,
+                    contentColor = Color.White
+                )
             ) {
                 Text(text = "Register")
             }

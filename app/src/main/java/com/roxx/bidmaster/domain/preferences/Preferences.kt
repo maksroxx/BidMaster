@@ -4,7 +4,7 @@ interface Preferences {
 
     // token
     fun saveToken(key: String)
-    fun getToken(): String
+    fun getToken(): String?
 
     // bidState
     fun setBidState(state: Boolean)

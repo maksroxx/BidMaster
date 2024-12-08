@@ -15,8 +15,8 @@ class PreferencesImpl(
             .apply()
     }
 
-    override fun getToken(): String {
-        return sharedPreferences.getString(KEY_TOKEN, null)!!
+    override fun getToken(): String? {
+        return sharedPreferences.getString(KEY_TOKEN, null)
     }
 
 

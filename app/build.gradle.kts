@@ -52,8 +52,6 @@ android {
 }
 
 dependencies {
-    // Swipe to Refresh - Accompanist
-    implementation(libs.accompanist.swiperefresh)
 
     //retrofit
     implementation (libs.retrofit)
