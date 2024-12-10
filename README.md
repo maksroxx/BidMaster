@@ -11,6 +11,13 @@
   - **Зеленый**: Профитные ставки
   - **Красный**: Непрофитные ставки
 
+## Вид приложения
+<div align="center">
+    <img src="https://github.com/maksroxx/BidMaster/blob/main/img/login.png" alt="Экран входа" width="303"/>
+    <img src="https://github.com/maksroxx/BidMaster/blob/main/img/home.png" alt="Главный экран" width="300"/>
+    <img src="https://github.com/maksroxx/BidMaster/blob/main/img/profile.png" alt="Экран профиля" width="300"/>
+</div>
+
 ## Установка
 
 1. Клонируйте репозиторий приложения:
