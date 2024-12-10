@@ -53,6 +53,9 @@ android {
 
 dependencies {
 
+    // Encrypted Preferences
+    implementation(libs.androidx.security.crypto)
+
     //retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)

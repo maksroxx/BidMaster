@@ -1,8 +1,9 @@
 package com.roxx.bidmaster.di
 
 import android.app.Application
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.roxx.bidmaster.data.network.api.BidApi
 import com.roxx.bidmaster.data.preferences.PreferencesImpl
 import com.roxx.bidmaster.data.repository.BidRepositoryImpl
@@ -26,10 +27,20 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreferences(
+    fun provideEncryptedSharedPreferences(
         app: Application
     ): SharedPreferences {
-        return app.getSharedPreferences("shared_pref", MODE_PRIVATE)
+        val masterKeyAlias = MasterKey.Builder(app)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        return EncryptedSharedPreferences.create(
+            app,
+            "encrypted_shared_pref",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
     }
 
     @Provides
