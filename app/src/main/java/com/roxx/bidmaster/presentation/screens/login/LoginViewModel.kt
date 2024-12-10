@@ -57,10 +57,10 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginEvent.OnPasswordChange -> {
-                password = event.password
+                password = event.password.trim()
             }
             is LoginEvent.OnUsernameChange -> {
-                username = event.username
+                username = event.username.trim()
             }
         }
     }

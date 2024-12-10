@@ -32,11 +32,11 @@ class RegisterViewModel @Inject constructor(
     fun onEvent(event: RegisterEvent) {
         when (event) {
             is RegisterEvent.OnPasswordChange -> {
-                password = event.password
+                password = event.password.trim()
             }
 
             is RegisterEvent.OnUsernameChange -> {
-                username = event.username
+                username = event.username.trim()
             }
 
             is RegisterEvent.Register -> {
