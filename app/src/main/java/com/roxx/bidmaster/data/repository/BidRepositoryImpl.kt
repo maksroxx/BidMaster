@@ -1,6 +1,5 @@
 package com.roxx.bidmaster.data.repository
 
-import android.util.Log
 import com.roxx.bidmaster.domain.model.Bid
 import com.roxx.bidmaster.domain.model.BidResponse
 import com.roxx.bidmaster.domain.model.Money
