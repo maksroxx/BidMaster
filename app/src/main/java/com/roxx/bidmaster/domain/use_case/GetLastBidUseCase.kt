@@ -17,11 +17,11 @@ class GetLastBidUseCase(
 
             is Result.Success -> {
                 result.data?.let {
-                    if (it == -2) {
+                    if (it.lastBidId == -2) {
                         preferences.setBidState(false)
                     } else {
                         preferences.setBidState(true)
-                        preferences.saveBidId(it)
+                        preferences.saveBidId(it.lastBidId)
                         Log.d("Bid Id", it.toString())
                     }
                 }

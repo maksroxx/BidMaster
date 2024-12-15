@@ -41,7 +41,7 @@ object ApiErrorHandler {
 
             404 -> {
                 Log.e("API Call", "Not found: ${e.message()}")
-                Result.Error("Resource not found")
+                Result.Error("Resource not found", true)
             }
 
             409 -> {

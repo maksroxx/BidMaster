@@ -6,8 +6,9 @@ import com.roxx.bidmaster.domain.model.Money
 import com.roxx.bidmaster.data.network.api.BidApi
 import com.roxx.bidmaster.domain.model.User
 import com.roxx.bidmaster.domain.model.UserRequest
-import com.roxx.bidmaster.data.network.model.UserResponse
+import com.roxx.bidmaster.domain.model.UserResponse
 import com.roxx.bidmaster.data.network.ApiErrorHandler.handleApiCall
+import com.roxx.bidmaster.domain.model.BidId
 import com.roxx.bidmaster.domain.repository.BidRepository
 import com.roxx.bidmaster.domain.model.Result
 
@@ -54,10 +55,10 @@ class BidRepositoryImpl(private val bidApi: BidApi) : BidRepository {
         }
     }
 
-    override suspend fun getLatBidId(): Result<Int> {
+    override suspend fun getLatBidId(): Result<BidId> {
         return handleApiCall {
             val bidId = bidApi.getLatBid()
-            Result.Success(bidId.lastBidId)
+            Result.Success(bidId)
         }
     }
 

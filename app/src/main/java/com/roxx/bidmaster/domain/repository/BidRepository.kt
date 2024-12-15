@@ -5,7 +5,8 @@ import com.roxx.bidmaster.domain.model.BidResponse
 import com.roxx.bidmaster.domain.model.Money
 import com.roxx.bidmaster.domain.model.User
 import com.roxx.bidmaster.domain.model.UserRequest
-import com.roxx.bidmaster.data.network.model.UserResponse
+import com.roxx.bidmaster.domain.model.UserResponse
+import com.roxx.bidmaster.domain.model.BidId
 import com.roxx.bidmaster.domain.model.Result
 
 interface BidRepository {
@@ -15,7 +16,7 @@ interface BidRepository {
     suspend fun getMyInformation(): Result<User>
     suspend fun makeBid(money: Money): Result<BidResponse>
     suspend fun getMyBids(): Result<List<Bid>>
-    suspend fun getLatBidId(): Result<Int>
+    suspend fun getLatBidId(): Result<BidId>
     suspend fun deleteBid(bidId: Int): Result<Money>
     suspend fun validateToken(): Result<String>
 }

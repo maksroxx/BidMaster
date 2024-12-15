@@ -1,12 +1,12 @@
 package com.roxx.bidmaster.data.network.api
 
-import com.roxx.bidmaster.data.network.model.BidId
+import com.roxx.bidmaster.domain.model.BidId
 import com.roxx.bidmaster.domain.model.Bid
 import com.roxx.bidmaster.domain.model.Money
 import com.roxx.bidmaster.domain.model.BidResponse
 import com.roxx.bidmaster.domain.model.User
 import com.roxx.bidmaster.domain.model.UserRequest
-import com.roxx.bidmaster.data.network.model.UserResponse
+import com.roxx.bidmaster.domain.model.UserResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET

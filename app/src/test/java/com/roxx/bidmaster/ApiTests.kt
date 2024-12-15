@@ -3,7 +3,7 @@ package com.roxx.bidmaster
 import android.util.Log
 import com.google.gson.Gson
 import com.roxx.bidmaster.data.network.api.BidApi
-import com.roxx.bidmaster.data.network.model.UserResponse
+import com.roxx.bidmaster.domain.model.UserResponse
 import com.roxx.bidmaster.data.repository.BidRepositoryImpl
 import com.roxx.bidmaster.domain.model.Money
 import com.roxx.bidmaster.domain.model.Result
