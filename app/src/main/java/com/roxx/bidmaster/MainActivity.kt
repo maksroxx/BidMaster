@@ -20,6 +20,7 @@ import com.roxx.bidmaster.presentation.screens.home.HomeScreen
 import com.roxx.bidmaster.presentation.screens.login.LoginScreen
 import com.roxx.bidmaster.presentation.screens.profile.ProfileScreen
 import com.roxx.bidmaster.presentation.screens.register.RegisterScreen
+import com.roxx.bidmaster.presentation.screens.search.SearchScreen
 import com.roxx.bidmaster.presentation.screens.welcome.WelcomeScreen
 import com.roxx.bidmaster.ui.theme.BidMasterTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,6 +69,11 @@ class MainActivity : ComponentActivity() {
                             composable(Routes.PROFILE) {
                                 ProfileScreen(
                                     snackBarHostState = snackBarHostState,
+                                    onNavigate = navController::navigate
+                                )
+                            }
+                            composable(Routes.SEARCH) {
+                                SearchScreen(
                                     onNavigate = navController::navigate
                                 )
                             }

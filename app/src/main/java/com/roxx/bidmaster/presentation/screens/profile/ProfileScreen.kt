@@ -16,6 +16,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -71,17 +73,35 @@ fun ProfileScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-        IconButton(
-            onClick = { viewModel.onClick() },
+        Row(
             modifier = Modifier
-                .align(Alignment.Start)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back",
-                modifier = Modifier.size(32.dp)
-            )
+            IconButton(
+                onClick = { viewModel.onBack() }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+
+            IconButton(
+                onClick = { viewModel.onSearch() }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Back",
+                    modifier = Modifier.size(32.dp)
+                )
+            }
         }
+
+
+
 
         Spacer(modifier = Modifier.height(localSpacing.medium))
 

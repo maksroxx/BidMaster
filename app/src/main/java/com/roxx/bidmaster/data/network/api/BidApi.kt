@@ -4,6 +4,7 @@ import com.roxx.bidmaster.domain.model.BidId
 import com.roxx.bidmaster.domain.model.Bid
 import com.roxx.bidmaster.domain.model.Money
 import com.roxx.bidmaster.domain.model.BidResponse
+import com.roxx.bidmaster.domain.model.SearchUser
 import com.roxx.bidmaster.domain.model.User
 import com.roxx.bidmaster.domain.model.UserRequest
 import com.roxx.bidmaster.domain.model.UserResponse
@@ -56,7 +57,13 @@ interface BidApi {
         @Path("id") bidId: Int
     ): Money
 
+    @POST("/search")
+    suspend fun searchUser(
+        @Header("Requires-Auth") requiresAuth: String = "true",
+        @Body searchUser: SearchUser
+    ): User
+
     companion object {
-        const val BASE_URL = "http://192.168.1.105:8080"
+        const val BASE_URL = "http://10.0.2.2:8080"
     }
 }

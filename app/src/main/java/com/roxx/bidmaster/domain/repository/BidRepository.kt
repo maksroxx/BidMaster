@@ -8,6 +8,7 @@ import com.roxx.bidmaster.domain.model.UserRequest
 import com.roxx.bidmaster.domain.model.UserResponse
 import com.roxx.bidmaster.domain.model.BidId
 import com.roxx.bidmaster.domain.model.Result
+import com.roxx.bidmaster.domain.model.SearchUser
 
 interface BidRepository {
     suspend fun createUser(userRequest: UserRequest): Result<UserResponse>
@@ -19,4 +20,5 @@ interface BidRepository {
     suspend fun getLatBidId(): Result<BidId>
     suspend fun deleteBid(bidId: Int): Result<Money>
     suspend fun validateToken(): Result<String>
+    suspend fun searchUser(searchUser: SearchUser): Result<User>
 }

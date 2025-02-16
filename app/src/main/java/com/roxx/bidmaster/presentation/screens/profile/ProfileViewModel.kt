@@ -63,9 +63,15 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun onClick() {
+    fun onBack() {
         viewModelScope.launch {
             _uiEvent.send(UiEvent.Navigate(Routes.HOME))
+        }
+    }
+
+    fun onSearch() {
+        viewModelScope.launch {
+            _uiEvent.send(UiEvent.Navigate(Routes.SEARCH))
         }
     }
 }
