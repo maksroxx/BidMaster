@@ -67,7 +67,7 @@ fun RegisterScreen(
             OutlinedTextField(
                 value = viewModel.username,
                 onValueChange = { viewModel.onEvent(RegisterEvent.OnUsernameChange(it)) },
-                label = { Text("Username") },
+                label = { Text("Логин") },
                 singleLine = true,
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Person, contentDescription = "User Icon")
@@ -80,7 +80,7 @@ fun RegisterScreen(
             OutlinedTextField(
                 value = viewModel.password,
                 onValueChange = { viewModel.onEvent(RegisterEvent.OnPasswordChange(it)) },
-                label = { Text("Password") },
+                label = { Text("Пароль") },
                 visualTransformation = PasswordVisualTransformation(),
                 singleLine = true,
                 leadingIcon = {
@@ -100,13 +100,13 @@ fun RegisterScreen(
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Register")
+                Text(text = "Зарегистрирововаться")
             }
 
             Spacer(modifier = Modifier.height(localSpacing.small))
 
             Text(
-                text = "Have account? Login",
+                text = "Есть аккаунт? Войти",
                 color = Color.Black,
                 modifier = Modifier
                     .clickable { viewModel.onEvent(RegisterEvent.ToLogin) }

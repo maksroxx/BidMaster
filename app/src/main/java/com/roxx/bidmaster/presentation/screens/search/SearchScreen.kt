@@ -93,12 +93,16 @@ fun SearchScreen(
                     )
                 }
 
-                else -> {
+                state.query.isNotEmpty() -> {
                     EmptyStateMessage(
                         onDetailsClick = {
                             viewModel.onEvent(SearchEvent.OnBack)
                         }
                     )
+                }
+
+                else -> {
+                    ButtonBack({ viewModel.onEvent(SearchEvent.OnBack) }, "Обратно")
                 }
             }
         }
@@ -129,14 +133,14 @@ private fun UserProfileCard(user: User, onDetailsClick: () -> Unit) {
             Spacer(modifier = Modifier.height(LocalSpacing.current.small))
 
             Text(
-                text = "Balance: ${user.balance}",
+                text = "Баланс: ${user.balance}",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Black.copy(alpha = 0.8f)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            ButtonBack(onButtonClick = onDetailsClick, text = "Back")
+            ButtonBack(onButtonClick = onDetailsClick, text = "Обратно")
         }
     }
 }
@@ -150,17 +154,17 @@ private fun EmptyStateMessage(onDetailsClick: () -> Unit) {
     ) {
         Icon(
             imageVector = Icons.Default.Star,
-            contentDescription = "Not found",
+            contentDescription = "Не найдено",
             modifier = Modifier.size(LocalSpacing.current.extraLarge),
             tint = Color.Black.copy(alpha = 0.5f)
         )
         Spacer(modifier = Modifier.height(LocalSpacing.current.medium))
         Text(
-            text = "User not found",
+            text = "Ничего нету",
             style = MaterialTheme.typography.headlineLarge,
             color = Color.Black.copy(alpha = 0.7f)
         )
         Spacer(modifier = Modifier.height(LocalSpacing.current.medium))
-        ButtonBack(onButtonClick = onDetailsClick, text = "Back")
+        ButtonBack(onButtonClick = onDetailsClick, text = "")
     }
 }

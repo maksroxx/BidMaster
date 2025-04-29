@@ -94,7 +94,7 @@ fun ProfileScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = "Back",
+                    contentDescription = "Обратно",
                     modifier = Modifier.size(32.dp)
                 )
             }
@@ -107,7 +107,7 @@ fun ProfileScreen(
 
         user?.let {
             Text(
-                text = "Welcome ${it.username}",
+                text = "Привет ${it.username}",
                 style = MaterialTheme.typography.displaySmall,
                 maxLines = 2
             )
@@ -120,12 +120,12 @@ fun ProfileScreen(
                     .background(Color.DarkGray)
                     .padding(localSpacing.small),
                 color = Color.White,
-                text = "Balance: ${it.balance}",
+                text = "Баланс: ${it.balance}",
                 style = MaterialTheme.typography.bodyLarge
             )
         } ?: run {
             Text(
-                text = "Uploading user information...",
+                text = "Загружаем информацию пользователя...",
                 style = MaterialTheme.typography.bodyLarge
             )
         }
@@ -144,7 +144,7 @@ fun ProfileScreen(
             Text(
                 modifier = Modifier.fillMaxWidth().padding(start = localSpacing.small),
                 textAlign = TextAlign.Start,
-                text = "Bids",
+                text = "Ставки",
                 style = MaterialTheme.typography.headlineSmall
             )
             Spacer(modifier = Modifier.height(localSpacing.small))
@@ -183,19 +183,19 @@ fun BidItem(bid: BidUi) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Bid ID: ${bid.id}", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "Номер ставки: ${bid.id}", style = MaterialTheme.typography.bodyLarge)
                 Text(text = bid.createdAt, style = MaterialTheme.typography.bodyLarge)
             }
             Spacer(modifier = Modifier.height(localSpacing.medium))
-            Text(text = "Amount: ${bid.amount}", style = MaterialTheme.typography.bodyLarge)
+            Text(text = "Сумма: ${bid.amount}", style = MaterialTheme.typography.bodyLarge)
             Spacer(modifier = Modifier.height(localSpacing.medium))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Profit: ${bid.profit}", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "Status: ${bid.status}", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "Профит: ${bid.profit}", style = MaterialTheme.typography.bodyLarge)
+                Text(text = "Статус: ${bid.status}", style = MaterialTheme.typography.bodyLarge)
             }
         }
     }

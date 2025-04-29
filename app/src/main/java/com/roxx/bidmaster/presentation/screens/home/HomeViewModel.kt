@@ -15,6 +15,8 @@ import com.roxx.bidmaster.presentation.navigation.Routes
 import com.roxx.bidmaster.presentation.util.UiEvent
 import com.roxx.bidmaster.presentation.util.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

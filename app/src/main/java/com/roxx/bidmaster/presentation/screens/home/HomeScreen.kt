@@ -85,7 +85,7 @@ fun HomeScreen(
                     .background(Color.Gray)
                     .padding(localSpacing.small)
             ) {
-                Text(text = "Balance: ${viewModel.balance}", color = Color.White)
+                Text(text = "Баланс: ${viewModel.balance}", color = Color.White)
             }
             IconButton(onClick = { viewModel.onEvent(HomeEvent.GoProfile) }) {
                 Icon(
@@ -112,7 +112,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.padding(vertical = localSpacing.medium)
                 ) {
-                    Text(text = "Bid: ", fontSize = 32.sp)
+                    Text(text = "Ставка: ", fontSize = 32.sp)
                     BasicTextField(
                         value = viewModel.amount.toString(),
                         singleLine = true,
@@ -170,7 +170,7 @@ fun HomeScreen(
                 ),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text(text = if (bidState) "Delete a bid" else "Place a bid")
+                Text(text = if (bidState) "Удалить ставку" else "Сделать ставку")
             }
         }
     }

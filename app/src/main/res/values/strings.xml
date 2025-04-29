@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">BidMaster</string>
+    <string name="bid_id">Bid ID</string>
+    <string name="balance">Balance</string>
+    <string name="greet">Welcome</string>
+    <string name="amount">Amount</string>
+    <string name="profit">Profit</string>
+    <string name="status">Status</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="user_not_found">User not found</string>
+    <string name="delete_bid">Delete a bid</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="enter">Enter</string>
+    <string name="no_acc">No account? Register</string>
+    <string name="have_acc">Have account? Login</string>
+    <string name="bid">Bid</string>
+    <string name="clear">Очистить</string>
 </resources>

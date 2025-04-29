@@ -67,7 +67,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = viewModel.username,
                 onValueChange = { viewModel.onEvent(LoginEvent.OnUsernameChange(it)) },
-                label = { Text("Username") },
+                label = { Text("Логин") },
                 singleLine = true,
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Person, contentDescription = "User Icon")
@@ -80,7 +80,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = viewModel.password,
                 onValueChange = { viewModel.onEvent(LoginEvent.OnPasswordChange(it)) },
-                label = { Text("Password") },
+                label = { Text("Пароль") },
                 visualTransformation = PasswordVisualTransformation(),
                 singleLine = true,
                 leadingIcon = {
@@ -106,7 +106,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(localSpacing.small))
 
             Text(
-                text = "No account? Register",
+                text = "Нету аккаунта? Зарегистрируем",
                 color = Color.Black,
                 modifier = Modifier
                     .clickable { viewModel.onEvent(LoginEvent.ToRegister) }
