@@ -1,27 +1,14 @@
 package com.roxx.bidmaster.presentation.screens.search
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,8 +27,9 @@ fun SearchScreen(
 ) {
     val state = viewModel.state
     val user = viewModel.user.collectAsState().value
+    val history = viewModel.searchHistory.collectAsState().value
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> onNavigate(event)
@@ -58,7 +46,7 @@ fun SearchScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .padding(bottom = 140.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -69,7 +57,9 @@ fun SearchScreen(
                 text = state.query,
                 onValueChange = { viewModel.onEvent(SearchEvent.OnQueryChange(it)) },
                 onSearch = { viewModel.onEvent(SearchEvent.OnSearch) },
-                onFocusChanged = { viewModel.onEvent(SearchEvent.OnSearchFocusChange(it.isFocused)) },
+                onFocusChanged = {
+                    viewModel.onEvent(SearchEvent.OnSearchFocusChange(it.isFocused))
+                },
                 shouldShowHint = state.isHintVisible
             )
 
@@ -106,8 +96,48 @@ fun SearchScreen(
                 }
             }
         }
+
+        if (history.isNotEmpty() && user == null && !state.isSearching) {
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .background(Color.White)
+                    .padding(LocalSpacing.current.medium)
+            ) {
+                Text(
+                    text = "История поиска:",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.Black
+                )
+
+                Spacer(modifier = Modifier.height(LocalSpacing.current.extraSmall))
+
+                history.forEach { query ->
+                    Text(
+                        text = query,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
+                            .clickable {
+                                viewModel.onEvent(SearchEvent.OnSelectHistoryItem(query))
+                            },
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.DarkGray
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(LocalSpacing.current.small))
+
+                ButtonBack(
+                    onButtonClick = { viewModel.onEvent(SearchEvent.OnClearHistory) },
+                    text = "Очистить историю"
+                )
+            }
+        }
     }
 }
+
 
 @Composable
 private fun UserProfileCard(user: User, onDetailsClick: () -> Unit) {

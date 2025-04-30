@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.roxx.bidmaster.domain.model.Result
 import com.roxx.bidmaster.domain.model.User
+import com.roxx.bidmaster.domain.preferences.Preferences
 import com.roxx.bidmaster.domain.use_case.SearchUserUseCase
 import com.roxx.bidmaster.presentation.navigation.Routes
 import com.roxx.bidmaster.presentation.util.UiEvent
@@ -20,7 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchUserUseCase: SearchUserUseCase
+    private val searchUserUseCase: SearchUserUseCase,
+    private val preferences: Preferences
 ) : ViewModel() {
     var state by mutableStateOf(SearchState())
         private set
@@ -28,8 +30,15 @@ class SearchViewModel @Inject constructor(
     private val _user = MutableStateFlow<User?>(null)
     val user: StateFlow<User?> = _user
 
+    private val _searchHistory = MutableStateFlow<List<String>>(emptyList())
+    val searchHistory: StateFlow<List<String>> = _searchHistory
+
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
+
+    init {
+        loadSearchHistory()
+    }
 
     fun onEvent(event: SearchEvent) {
         when (event) {
@@ -52,7 +61,20 @@ class SearchViewModel @Inject constructor(
                     _uiEvent.send(UiEvent.Navigate(Routes.PROFILE))
                 }
             }
+
+            SearchEvent.OnClearHistory -> {
+                preferences.clearSearchHistory()
+                _searchHistory.value = emptyList()
+            }
+            is SearchEvent.OnSelectHistoryItem -> {
+                state = state.copy(query = event.query)
+                executeSearch()
+            }
         }
+    }
+
+    private fun loadSearchHistory() {
+        _searchHistory.value = preferences.getSearchHistory()
     }
 
     private fun executeSearch() {
@@ -72,6 +94,8 @@ class SearchViewModel @Inject constructor(
                 is Result.Success -> {
                     result.data?.let {
                         _user.value = result.data
+                        preferences.saveSearchHistory(state.query)
+                        loadSearchHistory()
                         state = state.copy(
                             isSearching = false,
                             query = ""

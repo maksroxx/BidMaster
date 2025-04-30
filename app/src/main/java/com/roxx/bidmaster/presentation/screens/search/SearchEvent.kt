@@ -5,4 +5,6 @@ sealed class SearchEvent {
     object OnSearch: SearchEvent()
     object OnBack: SearchEvent()
     data class OnSearchFocusChange(val isFocused: Boolean): SearchEvent()
+    data class OnSelectHistoryItem(val query: String): SearchEvent()
+    object OnClearHistory: SearchEvent()
 }

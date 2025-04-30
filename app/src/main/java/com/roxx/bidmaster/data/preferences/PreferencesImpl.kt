@@ -3,6 +3,7 @@ package com.roxx.bidmaster.data.preferences
 import android.content.SharedPreferences
 import com.roxx.bidmaster.domain.preferences.Preferences
 import com.roxx.bidmaster.domain.preferences.Preferences.Companion.KEY_BID
+import com.roxx.bidmaster.domain.preferences.Preferences.Companion.KEY_SEARCH_HISTORY
 import com.roxx.bidmaster.domain.preferences.Preferences.Companion.KEY_STATE
 import com.roxx.bidmaster.domain.preferences.Preferences.Companion.KEY_TOKEN
 
@@ -39,4 +40,26 @@ class PreferencesImpl(
     override fun getBidId(): Int {
         return sharedPreferences.getInt(KEY_BID, 0)
     }
+
+    override fun saveSearchHistory(query: String) {
+        val currentHistory = getSearchHistory().toMutableList()
+        currentHistory.remove(query)
+        currentHistory.add(0, query)
+        if (currentHistory.size > 10) currentHistory.removeLast()
+        sharedPreferences.edit()
+            .putString(KEY_SEARCH_HISTORY, currentHistory.joinToString(","))
+            .apply()
+    }
+
+    override fun getSearchHistory(): List<String> {
+        return sharedPreferences.getString(KEY_SEARCH_HISTORY, "")
+            ?.split(",")
+            ?.filter { it.isNotBlank() }
+            ?: emptyList()
+    }
+
+    override fun clearSearchHistory() {
+        sharedPreferences.edit().remove(KEY_SEARCH_HISTORY).apply()
+    }
+
 }

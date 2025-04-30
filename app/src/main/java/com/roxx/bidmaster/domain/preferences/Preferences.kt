@@ -14,9 +14,15 @@ interface Preferences {
     fun saveBidId(bidId: Int)
     fun getBidId(): Int
 
+    // search
+    fun saveSearchHistory(query: String)
+    fun getSearchHistory(): List<String>
+    fun clearSearchHistory()
+
     companion object {
         const val KEY_TOKEN = "token"
         const val KEY_BID = "bid"
         const val KEY_STATE = "state"
+        const val KEY_SEARCH_HISTORY = "key_search_history"
     }
 }
