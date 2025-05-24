@@ -4,6 +4,7 @@ import com.roxx.bidmaster.domain.model.BidId
 import com.roxx.bidmaster.domain.model.Bid
 import com.roxx.bidmaster.domain.model.Money
 import com.roxx.bidmaster.domain.model.BidResponse
+import com.roxx.bidmaster.domain.model.DailyItem
 import com.roxx.bidmaster.domain.model.SearchUser
 import com.roxx.bidmaster.domain.model.User
 import com.roxx.bidmaster.domain.model.UserRequest
@@ -24,6 +25,9 @@ interface BidApi {
 
     @GET("/top")
     suspend fun getTopUsers(): List<User>
+
+    @GET("/item")
+    suspend fun getDailyItem(): DailyItem
 
     @GET("/me")
     suspend fun getMyInformation(

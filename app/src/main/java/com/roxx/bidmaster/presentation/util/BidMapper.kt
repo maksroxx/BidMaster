@@ -12,7 +12,8 @@ fun Bid.toBidUi(): BidUi {
         amount = amount,
         createdAt = createdAt.toDataString(),
         status = status,
-        profit = profit
+        profit = profit,
+        title = title
     )
 }
 

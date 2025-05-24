@@ -142,7 +142,9 @@ fun ProfileScreen(
             )
         } else {
             Text(
-                modifier = Modifier.fillMaxWidth().padding(start = localSpacing.small),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = localSpacing.small),
                 textAlign = TextAlign.Start,
                 text = "Ставки",
                 style = MaterialTheme.typography.headlineSmall
@@ -189,14 +191,9 @@ fun BidItem(bid: BidUi) {
             Spacer(modifier = Modifier.height(localSpacing.medium))
             Text(text = "Сумма: ${bid.amount}", style = MaterialTheme.typography.bodyLarge)
             Spacer(modifier = Modifier.height(localSpacing.medium))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = "Профит: ${bid.profit}", style = MaterialTheme.typography.bodyLarge)
-                Text(text = "Статус: ${bid.status}", style = MaterialTheme.typography.bodyLarge)
-            }
+            Text(text = "Статус: ${bid.status}", style = MaterialTheme.typography.bodyLarge)
+            Spacer(modifier = Modifier.height(localSpacing.medium))
+            Text(text = "Лот: ${bid.title}", style = MaterialTheme.typography.bodyLarge)
         }
     }
 }

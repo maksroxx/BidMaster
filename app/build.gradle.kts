@@ -52,6 +52,8 @@ android {
 }
 
 dependencies {
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
     // Encrypted Preferences
     implementation(libs.androidx.security.crypto)

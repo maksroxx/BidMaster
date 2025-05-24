@@ -6,6 +6,7 @@ import com.roxx.bidmaster.domain.use_case.BidStateUseCase
 import com.roxx.bidmaster.domain.use_case.CreateUserUseCase
 import com.roxx.bidmaster.domain.use_case.DeleteBidUseCase
 import com.roxx.bidmaster.domain.use_case.GetBidsUseCase
+import com.roxx.bidmaster.domain.use_case.GetDailyItemUseCase
 import com.roxx.bidmaster.domain.use_case.GetLastBidUseCase
 import com.roxx.bidmaster.domain.use_case.GetMyInformationUseCase
 import com.roxx.bidmaster.domain.use_case.GetTopUsersUseCase
@@ -109,5 +110,13 @@ object UseCaseModule {
         bidRepository: BidRepository
     ): SearchUserUseCase {
         return SearchUserUseCase(bidRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetDailyItemUseCase(
+        bidRepository: BidRepository
+    ): GetDailyItemUseCase {
+        return GetDailyItemUseCase(bidRepository)
     }
 }

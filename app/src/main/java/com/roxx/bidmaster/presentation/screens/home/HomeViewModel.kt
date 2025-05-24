@@ -5,9 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.roxx.bidmaster.domain.model.DailyItem
 import com.roxx.bidmaster.domain.model.Result
 import com.roxx.bidmaster.domain.use_case.BidStateUseCase
 import com.roxx.bidmaster.domain.use_case.DeleteBidUseCase
+import com.roxx.bidmaster.domain.use_case.GetDailyItemUseCase
 import com.roxx.bidmaster.domain.use_case.GetLastBidUseCase
 import com.roxx.bidmaster.domain.use_case.GetMyInformationUseCase
 import com.roxx.bidmaster.domain.use_case.MakeBidUseCase
@@ -31,7 +33,8 @@ class HomeViewModel @Inject constructor(
     private val deleteBidUseCase: DeleteBidUseCase,
     private val bidStateUseCase: BidStateUseCase,
     private val getMyInformationUseCase: GetMyInformationUseCase,
-    private val getLastBidUseCase: GetLastBidUseCase
+    private val getLastBidUseCase: GetLastBidUseCase,
+    private val getDailyItemUseCase: GetDailyItemUseCase
 ) : ViewModel() {
     var balance by mutableStateOf(0)
         private set
@@ -40,6 +43,9 @@ class HomeViewModel @Inject constructor(
         private set
 
     var sliderValue by mutableStateOf(0f)
+        private set
+
+    var dailyItem by mutableStateOf<DailyItem?>(null)
         private set
 
     private val _bidState = MutableStateFlow(false)
@@ -134,6 +140,16 @@ class HomeViewModel @Inject constructor(
                 is Result.Success -> {
                     result.data?.let {
                         balance = result.data.balance
+                    }
+                }
+            }
+            when (val result = getDailyItemUseCase()) {
+                is Result.Success -> {
+                    dailyItem = result.data
+                }
+                is Result.Error -> {
+                    result.message?.let {
+                        _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(result.message)))
                     }
                 }
             }

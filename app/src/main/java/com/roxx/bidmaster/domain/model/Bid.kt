@@ -5,5 +5,6 @@ data class Bid(
     val amount: Int,
     val createdAt: Int,
     val status: String,
-    val profit: Int
+    val profit: Int,
+    val title: String
 )

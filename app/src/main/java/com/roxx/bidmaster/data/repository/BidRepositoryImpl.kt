@@ -9,6 +9,7 @@ import com.roxx.bidmaster.domain.model.UserRequest
 import com.roxx.bidmaster.domain.model.UserResponse
 import com.roxx.bidmaster.data.network.ApiErrorHandler.handleApiCall
 import com.roxx.bidmaster.domain.model.BidId
+import com.roxx.bidmaster.domain.model.DailyItem
 import com.roxx.bidmaster.domain.repository.BidRepository
 import com.roxx.bidmaster.domain.model.Result
 import com.roxx.bidmaster.domain.model.SearchUser
@@ -81,6 +82,13 @@ class BidRepositoryImpl(private val bidApi: BidApi) : BidRepository {
         return handleApiCall {
             val user = bidApi.searchUser(searchUser = searchUser)
             Result.Success(user)
+        }
+    }
+
+    override suspend fun getDailyItem(): Result<DailyItem> {
+        return handleApiCall {
+            val result = bidApi.getDailyItem()
+            Result.Success(result)
         }
     }
 }

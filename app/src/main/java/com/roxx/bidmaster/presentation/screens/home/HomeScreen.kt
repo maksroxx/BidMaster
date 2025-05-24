@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.roxx.bidmaster.presentation.util.UiEvent
 import com.roxx.bidmaster.ui.theme.LocalSpacing
 
@@ -105,6 +106,19 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            viewModel.dailyItem?.let { item ->
+                Text(text = item.title, fontSize = 24.sp)
+                Spacer(modifier = Modifier.height(localSpacing.small))
+                AsyncImage(
+                    model = item.imageUrl,
+                    contentDescription = item.title,
+                    modifier = Modifier
+                        .size(200.dp)
+                        .clip(RoundedCornerShape(localSpacing.small))
+                        .background(Color.LightGray)
+                )
+                Spacer(modifier = Modifier.height(localSpacing.medium))
+            }
 
             if (!bidState) {
                 Row(

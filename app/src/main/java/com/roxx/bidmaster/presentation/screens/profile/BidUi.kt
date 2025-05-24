@@ -5,5 +5,6 @@ data class BidUi(
     val amount: Int,
     val createdAt: String,
     val status: String,
-    val profit: Int
+    val profit: Int,
+    val title: String
 )
